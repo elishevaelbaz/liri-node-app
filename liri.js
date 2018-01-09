@@ -53,27 +53,27 @@ function displaySongInfo(song){
 
 function displayMovieInfo(movie){
 
-// Then run a request to the OMDB API with the movie specified
-var queryUrl = "http://www.omdbapi.com/?t=" + movie + "&plot=short&apikey=trilogy"
+	// Then run a request to the OMDB API with the movie specified
+	var queryUrl = "http://www.omdbapi.com/?t=" + movie + "&plot=short&apikey=trilogy"
 
-request(queryUrl, function(error, response, body) {
+	request(queryUrl, function(error, response, body) {
 
-  // If the request is successful (i.e. if the response status code is 200)
-  if (!error && response.statusCode === 200) {
+	  // If the request is successful (i.e. if the response status code is 200)
+	  if (!error && response.statusCode === 200) {
 
-    // Parse the body of the site and recover just the imdbRating
-    // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-    var infoArray = ["Title", "Year", "Country", "Language", "Plot", "Actors"];
-    for (var i = 0; i < infoArray.length; i++) {
-    	console.log(infoArray[i] + ": " + JSON.parse(body)[infoArray[i]]);
-    }
+	    // Parse the body of the site and recover just the imdbRating
+	    // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
+	    var infoArray = ["Title", "Year", "Country", "Language", "Plot", "Actors"];
+	    for (var i = 0; i < infoArray.length; i++) {
+	    	console.log(infoArray[i] + ": " + JSON.parse(body)[infoArray[i]]);
+	    }
 
-   	console.log("imdb Rating: " + JSON.parse(body).Ratings[0].Value);
-    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-   
-  }
+	   	console.log("imdb Rating: " + JSON.parse(body).Ratings[0].Value);
+	    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+	   
+	  }
 
-});
+	});
 
 }
 
