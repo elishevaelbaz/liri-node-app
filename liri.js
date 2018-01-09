@@ -31,6 +31,16 @@ function displayTweets(){
 
 	  console.log(tweets);
 
+	  tweets.forEach(function(tweet){
+	  	console.log(tweet.text);
+	  console.log("Date created: " + tweet.created_at);
+	  })
+
+	  // for (var i = 0; i < tweets.length; i++) {
+	  // 	console.log(tweets[i].text);
+	  // 		console.log("Date created: " + tweets[i].created_at);
+	  // }
+	  
 	});
 }
 
@@ -45,8 +55,12 @@ function displaySongInfo(song){
 	    return console.log('Error occurred: ' + err);
 	  }
 	 
-	console.log(data); 
 	console.log(data.tracks.items[0]); 
+	console.log(data.tracks.items[0].name);
+	console.log(data.tracks.items[0].artists[0].name);  
+	console.log(data.tracks.items[0].preview_url);
+	console.log(data.tracks.items[0].album.name);  
+	 
 	});
 }
 
