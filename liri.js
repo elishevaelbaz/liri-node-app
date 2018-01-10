@@ -142,9 +142,9 @@ inquirer.prompt([
 ]).then(answers => {
 
 	switch(answers.command) {
-		// if user chose 'my-tweets', run the corresponding function
+		// if user chose 'my-tweets'
 		case "my-tweets":
-
+		//prompt the user to choose a twitter username/handle
 		inquirer.prompt([
 
 	  {
@@ -152,10 +152,10 @@ inquirer.prompt([
 	  	message: "Enter a valid twitter handle (If no handle is provided, I will use an alias account I made for this app)",
 	  	name: "twitterName"
 	  }
-				// then run the function using user input for the song 
+				// then run the function using user input for the username/handle
 				]).then(answers => {
 
-					//if no song was provided, use 'The Sign' by Ace of Base
+					//if no handle was provided, use the account I created
 					if (!answers.twitterName ){
 						answers.twitterName = "3lemonstar";
 					}
