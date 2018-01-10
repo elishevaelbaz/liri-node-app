@@ -1,6 +1,5 @@
 # liri-node-app
 
-# LIRI Bot
 
 ### Overview
 
@@ -8,7 +7,6 @@ LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and R
 
 ### Node Packages
  This app uses twitter, node-spotify-api, request, and inquirer node packages (see package.json).
-1. LIRI will display the latest tweets of my alias acount. As we do not want to display your personal account, or its keys, please make an alias account and add a few tweets to it!
 
 ### Instructions
 
@@ -28,7 +26,7 @@ liri.js will display a prompt with the following options:
 
    * This will show the last 20 tweets of an alias account and when they were created in the terminal/bash window.
 
-2. `spotify-this-song'`
+2. `spotify-this-song`
 
 	 * This will prompt the user to enter the name of a song
 
@@ -42,7 +40,7 @@ liri.js will display a prompt with the following options:
      
      * The album that the song is from
 
-   * If no song is provided then the program will default to "The Sign" by Ace of Base.
+   * If no song is provided, the program will default to "The Sign" by Ace of Base.
    
 
 3. `movie-this`
