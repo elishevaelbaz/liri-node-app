@@ -70,7 +70,7 @@ liri.js will display a prompt with the following options:
    
    * Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
      
-     * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
+     * It will run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
      
 
 
