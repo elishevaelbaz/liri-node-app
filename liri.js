@@ -58,8 +58,7 @@ function displaySongInfo(song){
 	    return console.log('Error occurred: ' + err);
 	  }
 
-	  console.log(data.tracks.items[0])
-		console.log("Song Name: " + data.tracks.items[0].name);
+		console.log("\nSong Name: " + data.tracks.items[0].name);
 		console.log("Artist(s): " + data.tracks.items[0].artists[0].name);  
 		console.log("Preview Link: " + data.tracks.items[0].preview_url);
 		console.log("Album: " + data.tracks.items[0].album.name);  
@@ -70,21 +69,22 @@ function displaySongInfo(song){
 
 function displayMovieInfo(movie){
 
-	// Then run a request to the OMDB API with the movie specified
+	// run a request to the OMDB API with the movie specified
 	var queryUrl = "http://www.omdbapi.com/?t=" + movie + "&plot=short&apikey=trilogy"
 
 	request(queryUrl, function(error, response, body) {
 
 	  // If the request is successful (i.e. if the response status code is 200)
 	  if (!error && response.statusCode === 200) {
-
+	  	//empty line for readability
+	  	console.log();
 	    // Parse the body of the site and recover the title, year, imdbRating etc
-	    // created an array and looped through it instead of having so many console.logs
+	    // loop through the array and console.log
 	    var infoArray = ["Title", "Year", "Country", "Language", "Plot", "Actors"];
 	    for (var i = 0; i < infoArray.length; i++) {
 	    	console.log(infoArray[i] + ": " + JSON.parse(body)[infoArray[i]]);
 	    }
-
+	    // also log these that couldn't quite go in the array
 	   	console.log("imdb Rating: " + JSON.parse(body).Ratings[0].Value);
 	    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
 	   
@@ -104,15 +104,10 @@ function readFromFile(){
 	  }
 
 	  // We will then print the contents of data
-	  console.log(data);
+	  console.log("\nThe file says: " + data + "\n(Loading...)");
 
-	  // Then split it by commas
+	  // Then create an array with the content split by the comma
 	  var dataArr = data.split(",");
-
-	  // We will then re-display the content as an array for later use.
-	  console.log(dataArr);
-
-	  console.log("node liri.js " + dataArr[0] + " " + dataArr[1]);
 
 	  //0th element of dataArr is one of the commands
 	  switch(dataArr[0]){
@@ -133,6 +128,7 @@ function readFromFile(){
 	});
 }
 
+
 // prompt the user to choose a command
 inquirer.prompt([
 
@@ -146,7 +142,7 @@ inquirer.prompt([
 ]).then(answers => {
   
 	switch(answers.command) {
-		// (if user chose 'my-tweets', run the corresponding function
+		// if user chose 'my-tweets', run the corresponding function
 	  case "my-tweets":
 	    displayTweets();
 	    break;
