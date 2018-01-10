@@ -13,7 +13,7 @@ var inquirer = require("inquirer");
 
 
 
-function displayTweets(){
+function displayTweets(handle){
 
 	var client = new Twitter({
 		consumer_key: twitterInfo.consumer_key,
@@ -22,7 +22,7 @@ function displayTweets(){
 		access_token_secret: twitterInfo.access_token_secret
 	});
 
-	var params = {screen_name: '3lemonstar'};
+	var params = {screen_name: handle};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
 		if (error) {
 			console.log(error);
@@ -30,7 +30,7 @@ function displayTweets(){
 
 	  // forEach tweet in the response ('tweets'), display the text and date created
 	  tweets.forEach(function(tweet, num){
-	  	
+
 	  	console.log("\ntweet #" + (num + 1));
 	  	console.log(tweet.text);
 	  	console.log("Date created: " + tweet.created_at);
@@ -52,7 +52,7 @@ function displaySongInfo(song){
 		secret: "a0de4ef3219f4d0c820c66c8dedb6b31"
 	});
 
-	
+
 	spotify.search({ type: 'track', query: song }, function(err, data) {
 		if (err) {
 			return console.log('Error occurred: ' + err);
@@ -62,7 +62,7 @@ function displaySongInfo(song){
 		console.log("Artist(s): " + data.tracks.items[0].artists[0].name);  
 		console.log("Preview Link: " + data.tracks.items[0].preview_url);
 		console.log("Album: " + data.tracks.items[0].album.name);  
-		
+
 	});
 }
 
@@ -87,7 +87,7 @@ function displayMovieInfo(movie){
 	    // also log these that couldn't quite go in the array
 	    console.log("imdb Rating: " + JSON.parse(body).Ratings[0].Value);
 	    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-	    
+
 	  }
 
 	});
@@ -113,7 +113,7 @@ function readFromFile(){
 	  switch(dataArr[0]){
 
 	  	case "my-tweets":
-	  	displayTweets();
+	  	displayTweets(dataArr[1]);
 	  	break;
 
 	  	case "spotify-this-song":
@@ -140,11 +140,30 @@ inquirer.prompt([
 }
 // then, based on their choice 
 ]).then(answers => {
-	
+
 	switch(answers.command) {
 		// if user chose 'my-tweets', run the corresponding function
 		case "my-tweets":
-		displayTweets();
+
+		inquirer.prompt([
+
+	  {
+	  	type: "input", 
+	  	message: "Enter a valid twitter handle (If no handle is provided, I will use an alias account I made for this app)",
+	  	name: "twitterName"
+	  }
+				// then run the function using user input for the song 
+				]).then(answers => {
+
+					//if no song was provided, use 'The Sign' by Ace of Base
+					if (!answers.twitterName ){
+						answers.twitterName = "3lemonstar";
+					}
+					
+					displayTweets(answers.twitterName);
+					
+				});
+		
 		break;
 
 		case "spotify-this-song":

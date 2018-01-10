@@ -24,7 +24,11 @@ liri.js will display a prompt with the following options:
 
 1. `my-tweets`
 
-   * This will show the last 20 tweets of an alias account and when they were created in the terminal/bash window.
+	 * This will prompt the user to enter a twitter username/handle.
+
+   * It will then show the last 20 tweets of that account and when they were created, in the terminal/bash window.
+
+   * If no twitter handle is provided, it will default to an alias account.
 
 2. `spotify-this-song`
 
