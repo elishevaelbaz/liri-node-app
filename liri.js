@@ -16,21 +16,21 @@ var inquirer = require("inquirer");
 function displayTweets(){
 
 	var client = new Twitter({
-  consumer_key: twitterInfo.consumer_key,
-  consumer_secret: twitterInfo.consumer_secret,
-  access_token_key: twitterInfo.access_token_key,
-  access_token_secret: twitterInfo.access_token_secret
-});
+		consumer_key: twitterInfo.consumer_key,
+		consumer_secret: twitterInfo.consumer_secret,
+		access_token_key: twitterInfo.access_token_key,
+		access_token_secret: twitterInfo.access_token_secret
+	});
 
 	var params = {screen_name: '3lemonstar'};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
-	  if (error) {
-	    console.log(error);
-	  }
+		if (error) {
+			console.log(error);
+		}
 
 	  // forEach tweet in the response ('tweets'), display the text and date created
 	  tweets.forEach(function(tweet, num){
-	  	  	
+	  	
 	  	console.log("\ntweet #" + (num + 1));
 	  	console.log(tweet.text);
 	  	console.log("Date created: " + tweet.created_at);
@@ -52,17 +52,17 @@ function displaySongInfo(song){
 		secret: "a0de4ef3219f4d0c820c66c8dedb6b31"
 	});
 
- 
+	
 	spotify.search({ type: 'track', query: song }, function(err, data) {
-	  if (err) {
-	    return console.log('Error occurred: ' + err);
-	  }
+		if (err) {
+			return console.log('Error occurred: ' + err);
+		}
 
 		console.log("\nSong Name: " + data.tracks.items[0].name);
 		console.log("Artist(s): " + data.tracks.items[0].artists[0].name);  
 		console.log("Preview Link: " + data.tracks.items[0].preview_url);
 		console.log("Album: " + data.tracks.items[0].album.name);  
-	 
+		
 	});
 }
 
@@ -85,9 +85,9 @@ function displayMovieInfo(movie){
 	    	console.log(infoArray[i] + ": " + JSON.parse(body)[infoArray[i]]);
 	    }
 	    // also log these that couldn't quite go in the array
-	   	console.log("imdb Rating: " + JSON.parse(body).Ratings[0].Value);
+	    console.log("imdb Rating: " + JSON.parse(body).Ratings[0].Value);
 	    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-	   
+	    
 	  }
 
 	});
@@ -100,7 +100,7 @@ function readFromFile(){
 
 	  // If the code experiences any errors it will log the error to the console.
 	  if (error) {
-	    return console.log(error);
+	  	return console.log(error);
 	  }
 
 	  // We will then print the contents of data
@@ -112,18 +112,18 @@ function readFromFile(){
 	  //0th element of dataArr is one of the commands
 	  switch(dataArr[0]){
 
-  		case "my-tweets":
-    		displayTweets();
-    		break;
+	  	case "my-tweets":
+	  	displayTweets();
+	  	break;
 
-  		case "spotify-this-song":
-  			displaySongInfo(dataArr[1]);
-    		break;
+	  	case "spotify-this-song":
+	  	displaySongInfo(dataArr[1]);
+	  	break;
 
-  		case "movie-this":
-  			displayMovieInfo(dataArr[1]);
-    		break;
-  		}
+	  	case "movie-this":
+	  	displayMovieInfo(dataArr[1]);
+	  	break;
+	  }
 
 	});
 }
@@ -140,22 +140,22 @@ inquirer.prompt([
 }
 // then, based on their choice 
 ]).then(answers => {
-  
+	
 	switch(answers.command) {
 		// if user chose 'my-tweets', run the corresponding function
-	  case "my-tweets":
-	    displayTweets();
-	    break;
+		case "my-tweets":
+		displayTweets();
+		break;
 
-	  case "spotify-this-song":
+		case "spotify-this-song":
 	  // show another prompt to get the song name
-	  	inquirer.prompt([
+	  inquirer.prompt([
 
-				{
-					type: "input", 
-					message: "Enter the name of a song (If none is provided I will use 'The Sign' by Ace of Base)",
-					name: "song"
-				}
+	  {
+	  	type: "input", 
+	  	message: "Enter the name of a song (If none is provided I will use 'The Sign' by Ace of Base)",
+	  	name: "song"
+	  }
 				// then run the function using user input for the song 
 				]).then(answers => {
 
@@ -168,17 +168,17 @@ inquirer.prompt([
 					
 				});
 
-	    break;
+				break;
 
-	  case "movie-this":
+				case "movie-this":
 	  // show another prompt to get the movie name
-	  	inquirer.prompt([
+	  inquirer.prompt([
 
-				{
-					type: "input", 
-					message: "Enter the name of a movie (If none is provided I will use 'Mr. Nobody')\n",
-					name: "movie"
-				}
+	  {
+	  	type: "input", 
+	  	message: "Enter the name of a movie (If none is provided I will use 'Mr. Nobody')\n",
+	  	name: "movie"
+	  }
 				// then run the function using user input for the movie
 				]).then(answers => {
 					// if no movie was provided, use 'Mr. Nobody'
@@ -189,15 +189,15 @@ inquirer.prompt([
 					displayMovieInfo(answers.movie);
 				});
 
-	    break;
+				break;
 
-	  case "do-what-it-says":
-	  	readFromFile();
+				case "do-what-it-says":
+				readFromFile();
 
-	    break;
-	}
+				break;
+			}
 
-});
+		});
 
 
 
